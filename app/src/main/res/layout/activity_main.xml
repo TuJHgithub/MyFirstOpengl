@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tujh.android.myfirstopengl.MainActivity">
+
+    <Button
+        android:id="@+id/triangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="三角形"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/triangle"
+        android:layout_margin="10dp"
+        android:text="GLSurfaceView显示图片"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/surfaceview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/photo"
+        android:layout_margin="10dp"
+        android:text="SurfaceView显示相机画面"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/textureview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/surfaceview"
+        android:layout_margin="10dp"
+        android:text="TextureView显示相机画面"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textureview"
+        android:layout_margin="10dp"
+        android:text="GLSurfaceView显示相机画面"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/sdk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video"
+        android:layout_margin="10dp"
+        android:text="GLSurfaceView显示sdk处理过的相机画面"
+        android:textAllCaps="false" />
+
+
+</RelativeLayout>

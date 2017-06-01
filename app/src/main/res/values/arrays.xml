@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="prop_spinner_name">
+        <item>none</item>
+        <item>tiara </item>
+        <item>item0208</item>
+        <item>YellowEar</item>
+        <item>PrincessCrown</item>
+        <item>Mood</item>
+        <item>Deer</item>
+        <item>BeagleDog</item>
+        <item>item0501</item>
+        <item>ColorCrown</item>
+        <item>item0210</item>
+        <item>HappyRabbi</item>
+        <item>item0204</item>
+        <item>hartshorn</item>
+    </string-array>
+
+    <string-array name="filter_spinner_name">
+        <item>nature</item>
+        <item>delta </item>
+        <item>electric</item>
+        <item>slowlived</item>
+        <item>tokyo</item>
+        <item>warm</item>
+    </string-array>
+
+</resources>

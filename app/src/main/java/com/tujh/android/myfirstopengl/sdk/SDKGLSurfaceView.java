@@ -2,6 +2,7 @@ package com.tujh.android.myfirstopengl.sdk;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES11Ext;
@@ -73,7 +74,6 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
     public SDKGLSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-
         setEGLContextClientVersion(2);
         setRenderer(this);
         setRenderMode(RENDERMODE_WHEN_DIRTY);
@@ -91,19 +91,15 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
 
         openCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
 
-
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, final int width, final int height) {
-        Log.d(TAG, "onSurfaceChanged");
-        Log.d(TAG, "onSurfaceChanged width = " + width + " ; height = " + height);
-        Log.d(TAG, "onSurfaceChanged cameraHeight = " + cameraHeight + " ; cameraWidth = " + cameraWidth);
         GLES20.glViewport(0, 0, width, height);
 
         float ratio = (float) height * cameraHeight / (width * cameraWidth);
-        Matrix.frustumM(mProjectionMatrix, 0, -1, 1, -ratio, ratio, 3, 100);
-        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, 3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.frustumM(mProjectionMatrix, 0, -1f, 1f, -ratio, ratio, 3f, 10f);
+        Matrix.setLookAtM(mViewMatrix, 0, 0f, 0f, 3.01f, 0f, 0f, 0f, 0f, 1f, 0f);
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 
 //        videoRect.setTextureVertices((float) height * cameraHeight / (width * cameraWidth));
@@ -145,6 +141,7 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
     private int fboId;
     private int fboTex;
     private int renderBufferId;
+    private float[] mtx = new float[16];
 
     @Override
     public void onDrawFrame(GL10 gl) {
@@ -152,7 +149,6 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
 
         Log.d(TAG, "onDrawFrame start = " + System.currentTimeMillis());
         mSurface.updateTexImage();
-        float[] mtx = new float[16];
         mSurface.getTransformMatrix(mtx);
 
         // 人脸识别
@@ -213,7 +209,6 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
 
         videoRect.draw(fboTex, VideoRect.IDENTITY_MATRIX, VideoRect.IDENTITY_MATRIX);
 
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
     }
 
     @Override
@@ -225,7 +220,7 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
         Log.d(TAG, "onPreviewFrame = " + System.currentTimeMillis());
-//        camera.addCallbackBuffer(data);
+        camera.addCallbackBuffer(data);
         mCameraNV21Byte = data;
         requestRender();
     }
@@ -312,7 +307,7 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
                 }
             }
         }
-        camera.setPreviewCallback(this);
+        camera.setPreviewCallbackWithBuffer(this);
         try {
             camera.setPreviewTexture(mSurface);
         } catch (IOException e) {
@@ -340,7 +335,7 @@ public class SDKGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Ren
         }
         camera.setParameters(parameters);
 
-//        camera.addCallbackBuffer(new byte[((cameraWidth * cameraHeight) * ImageFormat.getBitsPerPixel(ImageFormat.NV21)) / 8]);
+        camera.addCallbackBuffer(new byte[((cameraWidth * cameraHeight) * ImageFormat.getBitsPerPixel(ImageFormat.NV21)) / 8]);
 
         camera.startPreview();
     }

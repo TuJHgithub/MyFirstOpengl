@@ -10,6 +10,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 
+import com.tujh.android.myfirstopengl.FPSUtil;
 import com.tujh.android.myfirstopengl.R;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -102,6 +103,7 @@ public class PhotoGLRenderer implements GLSurfaceView.Renderer {
 //        }
         photoSquare.draw(textures[0]);
 
+        FPSUtil.fps();
 //        brightnessEffect();
 //        photoSquare.draw(textures[1]);
     }

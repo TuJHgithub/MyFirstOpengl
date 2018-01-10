@@ -17,6 +17,6 @@ public class PhotoGLSurfaceView extends GLSurfaceView {
         setEGLContextClientVersion(2);
         photoGLRenderer = new PhotoGLRenderer(getContext());
         setRenderer(photoGLRenderer);
-        setRenderMode(RENDERMODE_WHEN_DIRTY);
+        setRenderMode(RENDERMODE_CONTINUOUSLY);
     }
 }
